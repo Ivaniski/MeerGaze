@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MeerGaze</string>
+    <string name="title_home">Home</string>
+    <string name="title_explore">Explore</string>
+    <string name="title_social">Social</string>
+    <string name="title_settings">Settings</string>
+</resources>
