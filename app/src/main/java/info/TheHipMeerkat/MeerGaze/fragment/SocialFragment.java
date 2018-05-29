@@ -1,9 +1,9 @@
 package info.TheHipMeerkat.MeerGaze.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import info.TheHipMeerkat.MeerGaze.R;
+import info.TheHipMeerkat.MeerGaze.helper.RegisterFragment;
+
 
 public class SocialFragment extends Fragment {
     View view;
@@ -30,6 +32,7 @@ public class SocialFragment extends Fragment {
     private EditText mPasswordField;
 
     private Button mLgnBtn;
+    private Button mRgstrBtn;
 
 
     public SocialFragment() {
@@ -49,8 +52,6 @@ public class SocialFragment extends Fragment {
 
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +67,8 @@ public class SocialFragment extends Fragment {
 
         mLgnBtn = (Button) view.findViewById(R.id.button);
 
+        mRgstrBtn = (Button) view.findViewById(R.id.register);
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -79,6 +82,17 @@ public class SocialFragment extends Fragment {
             @Override
             public void onClick(View view){
                 startSignIn();
+            }
+        });
+
+        mRgstrBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+
+                RegisterFragment registerFragment = new RegisterFragment();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(((ViewGroup)(getView().getParent())).getId(), registerFragment, registerFragment.getTag())
+                        .addToBackStack(null).commit();
             }
         });
 
@@ -105,13 +119,13 @@ public class SocialFragment extends Fragment {
                 public void onComplete(@NonNull Task<AuthResult> task){
 
                     if(!task.isSuccessful()){
-                        Toast.makeText(SocialFragment.this.getActivity(), "Sign in problem", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SocialFragment.this.getActivity(), "Email Already Exists", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(SocialFragment.this.getActivity(), "Sign in Success", Toast.LENGTH_LONG).show();
                     }
 
                 }
             });
         }
-
-
     }
 }
