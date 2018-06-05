@@ -1,21 +1,24 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="info.TheHipMeerkat.MeerGaze.fragment.ExploreFragment">
 
-    <ListView
+    <ImageView
         android:id="@+id/data_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_launcher"
+        android:adjustViewBounds="true" />
 
-    </ListView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="382dp"
-        android:layout_height="50dp"
-        android:text="Nothing To Show"
-        android:textSize="36sp"/>
-
-</FrameLayout>
+</RelativeLayout>

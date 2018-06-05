@@ -119,7 +119,7 @@ public class SocialFragment extends Fragment {
                 public void onComplete(@NonNull Task<AuthResult> task){
 
                     if(!task.isSuccessful()){
-                        Toast.makeText(SocialFragment.this.getActivity(), "Email Already Exists", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SocialFragment.this.getActivity(), "Invalid log in", Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(SocialFragment.this.getActivity(), "Sign in Success", Toast.LENGTH_LONG).show();
                     }
