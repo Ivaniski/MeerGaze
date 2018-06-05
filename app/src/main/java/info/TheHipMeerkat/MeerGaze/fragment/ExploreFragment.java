@@ -70,7 +70,7 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
-
+        //ya
         ImageView mImageView =  view.findViewById(R.id.data_list_view);
         TextView text =  (TextView) view.findViewById(R.id.text);
         //text.setVisibility(View.INVISIBLE);
