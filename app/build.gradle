@@ -62,5 +62,7 @@ dependencies {
 
     //Glide's RecyclerVIew
 
+    implementation 'com.felipecsl:gifimageview:2.1.0'
+    implementation 'commons-io:commons-io:2.4'
 }
 apply plugin: 'com.google.gms.google-services'
