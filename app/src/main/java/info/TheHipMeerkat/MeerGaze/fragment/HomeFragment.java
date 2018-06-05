@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import info.TheHipMeerkat.MeerGaze.Movie;
-import info.TheHipMeerkat.MeerGaze.*;
+import info.TheHipMeerkat.MeerGaze.app.MyApplication;
 import info.TheHipMeerkat.MeerGaze.R;
 
 public class HomeFragment extends Fragment {
@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //MyApplication.getInstance().addToRequestQueue(request);
+        MyApplication.getInstance().addToRequestQueue(request);
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
