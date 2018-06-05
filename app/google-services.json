@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "35961821432",
+    "firebase_url": "https://meergaze-fb65f.firebaseio.com",
+    "project_id": "meergaze-fb65f",
+    "storage_bucket": "meergaze-fb65f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35961821432:android:d06b2dda7bea7c83",
+        "android_client_info": {
+          "package_name": "info.androidhive.bottomnavigation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35961821432-kgsjqbfeok0ab5k8d61r7o5gm04tlrel.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.androidhive.bottomnavigation",
+            "certificate_hash": "59e79f5823ce2c3b9f5d27dfee0fc78233a359f2"
+          }
+        },
+        {
+          "client_id": "35961821432-i2tqg6361liotj9a181a1034tad40js6.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "35961821432-i2tqg6361liotj9a181a1034tad40js6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqR0rdUcB0hvpV4RjCiARunq9oQzq3yT0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35961821432-i2tqg6361liotj9a181a1034tad40js6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
