@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import info.TheHipMeerkat.MeerGaze.R;
 import info.TheHipMeerkat.MeerGaze.helper.DetailActivity;
 import info.TheHipMeerkat.MeerGaze.helper.ListData;
+//import info.TheHipMeerkat.MeerGaze.helper.SimpleImageListAdapter;
 
 
 public class ExploreFragment extends Fragment {
@@ -47,6 +48,23 @@ public class ExploreFragment extends Fragment {
     public ListView list;
     public TextView text;
     public View view;
+
+    public static String[] eatFoodyImages = {
+            "http://i.imgur.com/rFLNqWI.jpg",
+            "http://i.imgur.com/C9pBVt7.jpg",
+            "http://i.imgur.com/rT5vXE1.jpg",
+            "http://i.imgur.com/aIy5R2k.jpg",
+            "http://i.imgur.com/MoJs9pT.jpg",
+            "http://i.imgur.com/S963yEM.jpg",
+            "http://i.imgur.com/rLR2cyc.jpg",
+            "http://i.imgur.com/SEPdUIx.jpg",
+            "http://i.imgur.com/aC9OjaM.jpg",
+            "http://i.imgur.com/76Jfv9b.jpg",
+            "http://i.imgur.com/fUX7EIB.jpg",
+            "http://i.imgur.com/syELajx.jpg",
+            "http://i.imgur.com/COzBnru.jpg",
+            "http://i.imgur.com/Z3QjilA.jpg",
+    };
 
     public ExploreFragment() {
         // Required empty public constructor
@@ -72,14 +90,27 @@ public class ExploreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
         //ya
         ImageView mImageView =  view.findViewById(R.id.data_list_view);
+        ImageView mImageView2 =  view.findViewById(R.id.data_list_view);
         TextView text =  (TextView) view.findViewById(R.id.text);
         //text.setVisibility(View.INVISIBLE);
+
+        /*listView listView = (listview) findViewById(R.id.listview_example);
+
+        listView.setAdapter(
+                new SimpleImageListAdapter(
+                        getActivity(), eatFoodyImages
+                )
+        );*/
 
         String internetUrl = "https://media.istockphoto.com/photos/green-natural-beech-tree-forest-illuminated-by-sunbeams-through-fog-picture-id540390024";
 
         Glide.with(getActivity())
                 .load("http://via.placeholder.com/300.png")
                 .into(mImageView);
+
+        Glide.with(getActivity())
+                .load("http://via.placeholder.com/300.png")
+                .into(mImageView2);
 
         return view;
     }
