@@ -144,7 +144,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                    User temp = new User(email, name, 100);
+                                    User temp = new User(email, name, 1000);
 
                                     String userId = email.split("@")[0];
 

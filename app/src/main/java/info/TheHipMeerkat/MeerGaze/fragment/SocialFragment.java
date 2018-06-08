@@ -107,7 +107,7 @@ public class SocialFragment extends Fragment {
     }
 
     private void startSignIn(){
-        String email = mEmailField.getText().toString();
+        final String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
 
 
@@ -125,6 +125,10 @@ public class SocialFragment extends Fragment {
 
                         LeaderboardFragment LeaderboardFragment = new LeaderboardFragment();
                         FragmentManager manager = getFragmentManager();
+                        Bundle args = new Bundle();
+                        args.putString("email", email.split("@")[0].toLowerCase().trim());
+                        LeaderboardFragment.setArguments(args);
+
                         manager.beginTransaction().replace(((ViewGroup)(getView().getParent())).getId(), LeaderboardFragment, LeaderboardFragment.getTag())
                                 .addToBackStack(null).commit();
                     }
