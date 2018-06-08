@@ -49,7 +49,7 @@ public class ExploreFragment extends Fragment {
     public TextView text;
     public View view;
 
-    public static String[] eatFoodyImages = {
+    public static String[] items = {
             "http://i.imgur.com/rFLNqWI.jpg",
             "http://i.imgur.com/C9pBVt7.jpg",
             "http://i.imgur.com/rT5vXE1.jpg",
@@ -88,29 +88,12 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
-        //ya
-        ImageView mImageView =  view.findViewById(R.id.data_list_view);
-        ImageView mImageView2 =  view.findViewById(R.id.data_list_view);
-        TextView text =  (TextView) view.findViewById(R.id.text);
-        //text.setVisibility(View.INVISIBLE);
 
-        /*listView listView = (listview) findViewById(R.id.listview_example);
+        //items = getActivity().getResources().getStringArray(R.array.test);
+        list = (ListView) getActivity().findViewById(R.id.data_list_view);
 
-        listView.setAdapter(
-                new SimpleImageListAdapter(
-                        getActivity(), eatFoodyImages
-                )
-        );*/
-
-        String internetUrl = "https://media.istockphoto.com/photos/green-natural-beech-tree-forest-illuminated-by-sunbeams-through-fog-picture-id540390024";
-
-        Glide.with(getActivity())
-                .load("http://via.placeholder.com/300.png")
-                .into(mImageView);
-
-        Glide.with(getActivity())
-                .load("http://via.placeholder.com/300.png")
-                .into(mImageView2);
+        /*list.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                android.R.layout.simple_list_item_1 , items));*/
 
         return view;
     }

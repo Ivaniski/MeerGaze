@@ -3,6 +3,8 @@ package info.TheHipMeerkat.MeerGaze.helper;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,14 +13,21 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import info.TheHipMeerkat.MeerGaze.R;
 import info.TheHipMeerkat.MeerGaze.fragment.SocialFragment;
@@ -31,11 +40,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private EditText mEmailField;
     private EditText mPasswordField;
     private EditText mPasswordField2;
+    private EditText mNameField;
     private Button mRgstrBtn;
     private RegisterFragment fragment;
 
     private FirebaseAuth firebaseAuth;
 
+    private DatabaseReference mDatabase;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -59,14 +70,18 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_register, container, false);
 
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         mEmailField = (EditText) view.findViewById(R.id.RemailField);
         mPasswordField = (EditText) view.findViewById(R.id.Rpassword);
         mPasswordField2 = (EditText) view.findViewById(R.id.Rpassword2);
         mRgstrBtn = (Button) view.findViewById(R.id.Rregister);
+        mNameField = (EditText) view.findViewById(R.id.nameField);
 
         mRgstrBtn.setOnClickListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         return view;
     }
@@ -88,7 +103,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     public void registerUser(){
-        String email = mEmailField.getText().toString().trim();
+        final String email = mEmailField.getText().toString().trim();
+        final String name = mNameField.getText().toString().trim();
         String password = mPasswordField.getText().toString().trim();
         String confirm = mPasswordField2.getText().toString().trim();
 
@@ -112,11 +128,33 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(RegisterFragment.this.getActivity(), "Registered successfully."
+                            Toast.makeText(RegisterFragment.this.getActivity(), "Registered successfully. Please Login."
                                     , Toast.LENGTH_SHORT).show();
+
+                            DatabaseReference numUsersChild = FirebaseDatabase.getInstance().getReference();
+
+                            numUsersChild
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    mDatabase.child("User").child(name);
+                                    mDatabase.child("User").child(name).child("Email").setValue(email);
+                                    mDatabase.child("User").child(name).child("Name").setValue(name);
+                                    mDatabase.child("User").child(name).child("Points").setValue(100);
+
+                                    getFragmentManager().popBackStackImmediate();
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
                         }else{
-                            Toast.makeText(RegisterFragment.this.getActivity(), "There was a problem " +
-                                    "registering...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterFragment.this.getActivity(), "Email already in use" +
+                                    "", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

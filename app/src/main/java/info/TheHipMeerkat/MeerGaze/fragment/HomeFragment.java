@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
 
     // url to fetch shopping items
-    private static final String URL = "https://api.androidhive.info/json/movies_2017.json";
+    private static final String URL = "https://firebasestorage.googleapis.com/v0/b/meergaze.appspot.com/o/Loc_Database.json?alt=media&token=e2c4be23-96f4-4dd4-b398-fb025b8242a6";
 
     private RecyclerView recyclerView;
     private List<Movie> itemsList;
