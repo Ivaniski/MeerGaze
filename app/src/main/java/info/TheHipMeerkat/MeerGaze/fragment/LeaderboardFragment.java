@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,7 @@ public class LeaderboardFragment extends Fragment {
     private ListView mUserList;
     private TextView mNameView;
     private FirebaseUser mUser;
+    private String email;
     FirebaseAuth mAuth;
 
 
@@ -58,21 +60,41 @@ public class LeaderboardFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
-        mUserList = view.findViewById(R.id.user_list);
+        mUserList = (ListView) view.findViewById(R.id.test);
 
-        final ArrayAdapter<User> arrayAdapter = new ArrayAdapter<User>(getActivity(), R.layout.fragment_leaderboard, R.id.user_list, mUsernames);
-        mUserList.setAdapter(arrayAdapter);
+        email = getArguments().getString("email");
+        mNameView = (TextView) view.findViewById(R.id.greeting_var);
+
+        mDatabase.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                mNameView.setText(" " + user.Name.split(" ")[0].trim());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        final ArrayAdapter<User> arrayAdapter = new ArrayAdapter<User>(getActivity(), android.R.layout.simple_list_item_1,  mUsernames);
 
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                for(DataSnapshot child : dataSnapshot.getChildren()){
-                    User user = child.getValue(User.class);
+                //for(DataSnapshot child : dataSnapshot.getChildren()){
+                    User user = dataSnapshot.getValue(User.class);
                     Log.v(TAG, "object =" + user.Name);
                     Log.v(TAG, "object =" + user);
-                }
+                    String uid = mAuth.getUid();
+                    //String uid2 = mAuth.getDisplayName();
+                    Log.v(TAG, "user =" + email );
+                //}
 
-                //mUsernames.add(value);
+                mUsernames.add(user);
+                Log.v(TAG, "mUsernames = " + mUsernames);
+                mUserList.setAdapter(arrayAdapter);
                 arrayAdapter.notifyDataSetChanged();
             }
 
@@ -99,5 +121,4 @@ public class LeaderboardFragment extends Fragment {
 
         return view;
     }
-
 }
