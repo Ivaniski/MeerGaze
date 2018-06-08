@@ -29,7 +29,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import info.TheHipMeerkat.MeerGaze.R;
+import info.TheHipMeerkat.MeerGaze.User;
 import info.TheHipMeerkat.MeerGaze.fragment.SocialFragment;
 
 //import info.androidhive.bottomnavigation.R;
@@ -47,6 +51,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth firebaseAuth;
 
     private DatabaseReference mDatabase;
+
+    //Map<String, User> users = new HashMap<>();
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -103,7 +109,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     public void registerUser(){
-        final String email = mEmailField.getText().toString().trim();
+        final String email = mEmailField.getText().toString().trim().toLowerCase();
         final String name = mNameField.getText().toString().trim();
         String password = mPasswordField.getText().toString().trim();
         String confirm = mPasswordField2.getText().toString().trim();
@@ -131,17 +137,18 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                             Toast.makeText(RegisterFragment.this.getActivity(), "Registered successfully. Please Login."
                                     , Toast.LENGTH_SHORT).show();
 
-                            DatabaseReference numUsersChild = FirebaseDatabase.getInstance().getReference();
+                            final DatabaseReference numUsersChild = FirebaseDatabase.getInstance().getReference().child("user");
 
                             numUsersChild
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                    mDatabase.child("User").child(name);
-                                    mDatabase.child("User").child(name).child("Email").setValue(email);
-                                    mDatabase.child("User").child(name).child("Name").setValue(name);
-                                    mDatabase.child("User").child(name).child("Points").setValue(100);
+                                    User temp = new User(email, name, 100);
+
+                                    String userId = email.split("@")[0];
+
+                                    numUsersChild.child(userId).setValue(temp);
 
                                     getFragmentManager().popBackStackImmediate();
                                 }

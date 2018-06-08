@@ -122,6 +122,11 @@ public class SocialFragment extends Fragment {
                         Toast.makeText(SocialFragment.this.getActivity(), "Invalid log in", Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(SocialFragment.this.getActivity(), "Sign in Success", Toast.LENGTH_LONG).show();
+
+                        LeaderboardFragment LeaderboardFragment = new LeaderboardFragment();
+                        FragmentManager manager = getFragmentManager();
+                        manager.beginTransaction().replace(((ViewGroup)(getView().getParent())).getId(), LeaderboardFragment, LeaderboardFragment.getTag())
+                                .addToBackStack(null).commit();
                     }
 
                 }
