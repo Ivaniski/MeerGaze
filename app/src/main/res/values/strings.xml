@@ -4,7 +4,8 @@
     <string name="title_explore">Explore</string>
     <string name="title_social">Social</string>
     <string name="title_settings">Settings</string>
-    <string name="action_favorite"> Add Place </string>
+    <string name="action_favorite">Add Place</string>
+    <string name="google_API_key">AIzaSyCVnM6WvSdjsz6DnShGOSkABpBjUuzVNG4</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
