@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
@@ -82,7 +83,8 @@ public class ExploreFragment extends Fragment {
         itemsList = new ArrayList<>();
         mAdapter = new StoreAdapter(getActivity(), itemsList);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager( 2, vertical);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -128,6 +130,7 @@ public class ExploreFragment extends Fragment {
         MyApplication.getInstance().addToRequestQueue(request);
     }
 
+    // grid spacing
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         private int spanCount;
