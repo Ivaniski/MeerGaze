@@ -1,31 +1,26 @@
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f5f7"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="info.TheHipMeerkat.MeerGaze.fragment.HomeFragment">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/data_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_launcher"
+        android:adjustViewBounds="true" />
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:scrollbars="vertical" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingTop="10dp"
-            android:text="New Release Films"
-            android:textColor="#111"
-            android:textSize="16dp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:scrollbars="vertical" />
-
-    </LinearLayout>
-
-</android.support.v4.widget.NestedScrollView>
+</RelativeLayout>
