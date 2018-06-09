@@ -2,13 +2,13 @@ package info.TheHipMeerkat.MeerGaze.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
@@ -215,17 +215,70 @@ public class ExploreFragment extends Fragment {
             holder.name.setText(movie.getTitle());
             holder.price.setText(movie.getPrice());
 
+
             Glide.with(context)
                     .load(movie.getImage())
                     .into(holder.thumbnail);
+
+            holder.thumbnail.setOnClickListener(new View.OnClickListener() {
+                @Override
+
+                public void onClick (View view){
+
+                    Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            holder.name.setOnClickListener(new View.OnClickListener() {
+                @Override
+
+                public void onClick(View view) {
+
+                    Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            holder.price.setOnClickListener(new View.OnClickListener() {
+                @Override
+
+                public void onClick(View view) {
+
+                    Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+
+
+
+
+//            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View v) {
+//                    Toast.makeText(v.getContext(), "Recycle Click" + position, Toast.LENGTH_SHORT).show();
+//                    return true;
+//                }
+//            });
+
+
         }
+
 
         @Override
         public int getItemCount() {
             return movieList.size();
         }
 
+
+
+
+
     }
+
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
