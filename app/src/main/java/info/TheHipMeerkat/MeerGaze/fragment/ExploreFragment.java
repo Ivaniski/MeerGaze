@@ -49,7 +49,7 @@ public class ExploreFragment extends Fragment {
     private static final String TAG = ExploreFragment.class.getSimpleName();
 
     // url to fetch shopping items
-    private static final String URL = "https://firebasestorage.googleapis.com/v0/b/meergaze.appspot.com/o/Loc_Database.json?alt=media&token=e2c4be23-96f4-4dd4-b398-fb025b8242a6";
+    private static final String URL = "https://firebasestorage.googleapis.com/v0/b/meergaze.appspot.com/o/Loc_Database.json?alt=media&token=090be587-a0b8-43f2-b586-73d69ac843b5";
 
     private RecyclerView recyclerView;
     private List<Movie> itemsList;
@@ -230,12 +230,6 @@ public class ExploreFragment extends Fragment {
                 public void onClick (View view){
 
                     Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
-//                    MapFragment mapFragment = new MapFragment();
-//                    FragmentManager manager = getFragmentManager();
-//                    manager.beginTransaction()
-//                            .replace(((ViewGroup)(getView().getParent())).getId(), mapFragment, mapFragment.getTag())
-//                            .addToBackStack(null)
-//                            .commit();
                     Intent intent = new Intent(getActivity(), MapFragment.class);
                     startActivity(intent);
 

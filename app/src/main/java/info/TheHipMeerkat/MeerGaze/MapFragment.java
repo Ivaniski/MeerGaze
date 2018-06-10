@@ -1,37 +1,29 @@
 package info.TheHipMeerkat.MeerGaze;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-import info.TheHipMeerkat.MeerGaze.R;
-import info.TheHipMeerkat.MeerGaze.helper.RegisterFragment;
-
-//public class MapFragment extends FragmentActivity {
-//
-//
-//}
 
 public class MapFragment extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -52,7 +44,6 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 
 
 
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -67,9 +58,12 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        LatLng Porter = new LatLng(36.993187, -122.065201);
+        mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
+
     }
 
     @Override
@@ -101,4 +95,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
                 break;
         }
     }
+
+
+
 }
