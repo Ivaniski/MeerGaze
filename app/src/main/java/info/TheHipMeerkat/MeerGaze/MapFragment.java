@@ -29,6 +29,9 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 
     private GoogleMap mMap;
 
+    int position;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +43,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 99);
 
-        int value = (int) getIntent().getExtras().getLong("position");
-        Log.v("TAG", "position is = " +value);
+       position = (int) getIntent().getExtras().getLong("position");
 
     }
 
@@ -62,20 +64,63 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 
         // Add a marker in Sydney and move the camera
 
-//        if (position == ){
+        if (position == 0){
+            LatLng Porter = new LatLng(36.993187, -122.065201);
+            mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
+        }
 
-        LatLng Porter = new LatLng(36.993187, 122.065201);
-        mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
-//    }
+        if (position == 1){
+            LatLng Porter = new LatLng(37.002440169950745, -122.06022843541257);
+            mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
+        }
 
-//        if (position == 1) {
-//            LatLng Porter = new LatLng(37.7749, 122.4194);
-//            mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
-//        }
+        if (position == 2) {
+            LatLng Porter = new LatLng(36.996966, -122.053883);
+            mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
+        }
+
+        if (position == 3){
+            LatLng Porter = new LatLng(37.000020, 122.054591);
+            mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
+        }
+
+        if (position == 4){
+            LatLng Porter = new LatLng(36.999339, -122.049099);
+            mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
+        }
+
+        if (position == 5){
+            LatLng Porter = new LatLng(36.996102, -122.068807);
+            mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
+        }
+
+        if (position == 6){
+            LatLng Porter = new LatLng(36.997817, -122.062262);
+            mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
+        }
+
+        if (position == 7){
+            LatLng Porter = new LatLng(36.995912, -122.052142);
+            mMap.addMarker(new MarkerOptions().position(Porter).title("Marked"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
+        }
+
+
 
     }
 
