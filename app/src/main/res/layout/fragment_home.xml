@@ -15,7 +15,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="116dp"
         android:gravity="center_horizontal"
-        android:text="Welcome to Meergaze!"
+        android:text="Welcome to MeerGaze!"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -108,7 +108,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="88dp"
         android:layout_marginStart="88dp"
-        android:text="Meergaze Social Media"
+        android:text="MeerGaze Social Media"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2" />
 

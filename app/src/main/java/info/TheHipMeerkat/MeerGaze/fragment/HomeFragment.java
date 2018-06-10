@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
 
         scrollingText.setText("It is " + timeStamp + " and our meerkat friends think that's a great time go outside and explore!");
 
-        greetingmsg.setText("Welcome to MeergazeV"+patchNum + "!");
+        greetingmsg.setText("Welcome to MeerGazeV"+patchNum + "!");
 
 
         Glide.with(getActivity()).load("https://firebasestorage.googleapis.com/v0/b/meergaze.appspot.com/o/images%2Fmeerkat.png?alt=media&token=29db65ff-ba69-45d0-97e8-9d2f849b4664")

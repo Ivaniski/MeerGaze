@@ -236,7 +236,7 @@ public class ExploreFragment extends Fragment {
 
                 public void onClick (View view){
 
-                    Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Landmark" + " " + (position + 1), Toast.LENGTH_SHORT).show();
 
                     long temp = (long) position;
                     Intent intent = new Intent(getActivity(), MapFragment.class);
@@ -253,7 +253,7 @@ public class ExploreFragment extends Fragment {
 
                 public void onClick (View view){
 
-                    Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Landmark" + " " + (position + 1), Toast.LENGTH_SHORT).show();
 
                     long temp = (long) position;
                     Intent intent = new Intent(getActivity(), MapFragment.class);
@@ -270,7 +270,7 @@ public class ExploreFragment extends Fragment {
 
                 public void onClick (View view){
 
-                    Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Landmark" + " " + (position + 1), Toast.LENGTH_SHORT).show();
 
                     long temp = (long) position;
                     Intent intent = new Intent(getActivity(), MapFragment.class);
