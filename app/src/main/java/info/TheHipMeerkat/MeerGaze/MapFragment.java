@@ -73,8 +73,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
             public void onClick(final View view){
                 if(mAuth.getCurrentUser() != null) {
                     FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                    String userEmail = firebaseUser.getEmail();
-                    userEmail = userEmail.split("@")[0].toLowerCase().trim();
+                    final String userEmail = firebaseUser.getEmail().split("@")[0].toLowerCase().trim();
 
                     mRef.child(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -83,7 +82,7 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
                             Log.v("tag", "user = " + user);
 
                             if(user.locFound(position)){
-                                mRef.setValue(user);
+                                mRef.child(userEmail).setValue(user);
                                 Toast.makeText(view.getContext(), "Congratulations on your discovery fellow meerkat!", Toast.LENGTH_LONG).show();
 
                             }else{
