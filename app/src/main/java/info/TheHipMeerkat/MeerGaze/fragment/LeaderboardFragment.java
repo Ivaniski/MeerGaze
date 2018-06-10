@@ -22,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import info.TheHipMeerkat.MeerGaze.R;
 import info.TheHipMeerkat.MeerGaze.User;
@@ -94,7 +96,13 @@ public class LeaderboardFragment extends Fragment {
                 //}
 
                 mUsernames.add(user);
-                Log.v(TAG, "mUsernames = " + mUsernames);
+                Collections.sort(mUsernames, new Comparator<User>() {
+                    @Override
+                    public int compare(User user, User t1) {
+                        return Integer.valueOf(t1.Points).compareTo(user.Points);
+                    }
+                });
+                //Log.v(TAG, "mUsernames = " + mUsernames);
                 mUserList.setAdapter(arrayAdapter);
                 arrayAdapter.notifyDataSetChanged();
             }

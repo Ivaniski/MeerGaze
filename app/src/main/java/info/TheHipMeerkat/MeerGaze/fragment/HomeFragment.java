@@ -3,6 +3,7 @@ package info.TheHipMeerkat.MeerGaze.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
     public TextView text;
     public View view;
     public double patchNum = 1.00;
+    public boolean allowRefresh = true;
 
 
     public HomeFragment() {
@@ -62,6 +64,9 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    public void onResume() {
+        super.onResume();
+    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                             Bundle savedInstanceState) {
 
@@ -96,10 +101,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
