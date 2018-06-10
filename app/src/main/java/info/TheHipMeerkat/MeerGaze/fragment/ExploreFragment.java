@@ -59,7 +59,7 @@ public class ExploreFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ExploreFragment newInstance(String param1, String param2) {
+    public ExploreFragment newInstance(String param1, String param2) {
         ExploreFragment fragment = new ExploreFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -80,8 +80,6 @@ public class ExploreFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-
-
         recyclerView = view.findViewById(R.id.recycler_view);
         itemsList = new ArrayList<>();
         mAdapter = new StoreAdapter(getActivity(), itemsList);
@@ -95,6 +93,11 @@ public class ExploreFragment extends Fragment {
         recyclerView.setNestedScrollingEnabled(false);
 
         fetchStoreItems();
+
+        Log.v(TAG, "recycle view = " + recyclerView);
+        Log.v(TAG, "itemsList = " + itemsList);
+        Log.v(TAG, "mAdapter = " + mAdapter);
+
 
         return view;
     }
@@ -277,11 +280,6 @@ public class ExploreFragment extends Fragment {
         public int getItemCount() {
             return movieList.size();
         }
-
-
-
-
-
     }
 
 

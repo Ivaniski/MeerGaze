@@ -3,6 +3,8 @@ package info.TheHipMeerkat.MeerGaze.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,8 +15,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 import info.TheHipMeerkat.MeerGaze.R;
 //import info.TheHipMeerkat.MeerGaze.helper.SimpleImageListAdapter;
@@ -23,34 +32,21 @@ import info.TheHipMeerkat.MeerGaze.R;
 public class HomeFragment extends Fragment {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference();
+    StorageReference storageRef = storage.getReference().child("images");
+
 
     private ImageView mImageView;
 
     public ListView list;
     public TextView text;
     public View view;
+    public double patchNum = 1.00;
 
-    public static String[] items = {
-            "http://i.imgur.com/rFLNqWI.jpg",
-            "http://i.imgur.com/C9pBVt7.jpg",
-            "http://i.imgur.com/rT5vXE1.jpg",
-            "http://i.imgur.com/aIy5R2k.jpg",
-            "http://i.imgur.com/MoJs9pT.jpg",
-            "http://i.imgur.com/S963yEM.jpg",
-            "http://i.imgur.com/rLR2cyc.jpg",
-            "http://i.imgur.com/SEPdUIx.jpg",
-            "http://i.imgur.com/aC9OjaM.jpg",
-            "http://i.imgur.com/76Jfv9b.jpg",
-            "http://i.imgur.com/fUX7EIB.jpg",
-            "http://i.imgur.com/syELajx.jpg",
-            "http://i.imgur.com/COzBnru.jpg",
-            "http://i.imgur.com/Z3QjilA.jpg",
-    };
 
     public HomeFragment() {
         // Required empty public constructor
     }
+
 
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
@@ -64,6 +60,45 @@ public class HomeFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                            Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.meerkat_image);
+
+        TextView greetingmsg = (TextView) view.findViewById(R.id.textView9);
+        TextView scrollingText = (TextView) view.findViewById(R.id.scrollingText);
+
+        //SimpleDateFormat currentTime = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+        //currentTime.setTimeZone(TimeZone.getTimeZone("PST"));
+       // Date date = currentTime.parse();
+
+
+        DateFormat dateFormat = new SimpleDateFormat("EEE MMM d HH:mm");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+
+
+        String timeStamp = dateFormat.format(Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles")).getTime());
+                //.format(Calendar.getInstance(TimeZone.getTimeZone("PST")).getTime());
+
+        scrollingText.setText("It is " + timeStamp + " and our meerkat friends think that's a great time go outside and explore!");
+
+        greetingmsg.setText("Welcome to MeergazeV"+patchNum + "!");
+
+
+        Glide.with(getActivity()).load("https://firebasestorage.googleapis.com/v0/b/meergaze.appspot.com/o/images%2Fmeerkat.png?alt=media&token=29db65ff-ba69-45d0-97e8-9d2f849b4664")
+                .into(imageView);
+
+        return view;
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
 //    @Override
