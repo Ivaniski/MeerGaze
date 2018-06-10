@@ -73,7 +73,18 @@ public class SocialFragment extends Fragment {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null){
-                    //startActivity(new Intent(MainActivity.this, AccountActivity.class));
+                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                    String userEmail = firebaseUser.getEmail();
+
+                    LeaderboardFragment LeaderboardFragment = new LeaderboardFragment();
+                    FragmentManager manager = getFragmentManager();
+                    Bundle args = new Bundle();
+
+                    args.putString("email", userEmail.split("@")[0].toLowerCase().trim());
+                    LeaderboardFragment.setArguments(args);
+
+                    manager.beginTransaction().replace(((ViewGroup)(getView().getParent())).getId(), LeaderboardFragment, LeaderboardFragment.getTag())
+                            .addToBackStack(null).commit();
                 }
             }
         };

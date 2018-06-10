@@ -17,17 +17,34 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 public class MapFragment extends FragmentActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private GoogleMap mMap;
+    private DatabaseReference mDatabase;
+    private Button mButton;
+
+    private DatabaseReference mRef;
+    private FirebaseAuth mAuth;
 
     int position;
 
@@ -43,10 +60,50 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 99);
 
+
        position = (int) getIntent().getExtras().getLong("position");
 
-    }
+        mButton = (Button) findViewById(R.id.button2);
 
+        mAuth = FirebaseAuth.getInstance();
+        mRef = mDatabase = FirebaseDatabase.getInstance().getReference().child("user");;
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view){
+                if(mAuth.getCurrentUser() != null) {
+                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                    String userEmail = firebaseUser.getEmail();
+                    userEmail = userEmail.split("@")[0].toLowerCase().trim();
+
+                    mRef.child(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            User user = dataSnapshot.getValue(User.class);
+                            Log.v("tag", "user = " + user);
+
+                            if(user.locFound(position)){
+                                mRef.setValue(user);
+                                Toast.makeText(view.getContext(), "Congratulations on your discovery fellow meerkat!", Toast.LENGTH_LONG).show();
+
+                            }else{
+                                Toast.makeText(view.getContext(), "You already discovered this location", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                }else{
+                    Toast.makeText(view.getContext(), "Please sign in first", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
 
 
     /**
@@ -119,9 +176,6 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
             mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
         }
-
-
-
     }
 
     @Override
@@ -153,7 +207,5 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
                 break;
         }
     }
-
-
 
 }

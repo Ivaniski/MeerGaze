@@ -29,7 +29,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import info.TheHipMeerkat.MeerGaze.R;
@@ -144,7 +147,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                    User temp = new User(email, name, 1000);
+                                    List<Boolean> locs_Found=new ArrayList<Boolean>(Collections.nCopies(8, false));
+
+                                    User temp = new User(email, name, 1000, locs_Found);
 
                                     String userId = email.split("@")[0];
 

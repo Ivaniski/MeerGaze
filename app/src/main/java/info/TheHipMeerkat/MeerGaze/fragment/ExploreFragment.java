@@ -55,6 +55,7 @@ public class ExploreFragment extends Fragment {
     private List<Movie> itemsList;
     private StoreAdapter mAdapter;
 
+
     public ExploreFragment() {
         // Required empty public constructor
     }

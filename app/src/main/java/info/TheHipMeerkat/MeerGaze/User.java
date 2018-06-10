@@ -1,24 +1,44 @@
 package info.TheHipMeerkat.MeerGaze;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class User {
     public int Points;
     public String Email;
     public String Name;
+    //public boolean locs_Found[] = {false, false, false, false, false, false, false, false};
+    public List<Boolean> locs_Found;
+
 
     public User(){
 
     }
 
-    public User(String Email, String Name, int Points){
+    public User(String Email, String Name, int Points, List<Boolean> locs_Found){
         this.Points = Points;
         this.Email = Email;
         this.Name = Name;
+        this.locs_Found = locs_Found;
     }
 
-    User createUser(String Email, String Name, int Points){
-        User temp = new User(Email, Name, Points);
+    User createUser(String Email, String Name, int Points, List<Boolean> locs_Found){
+        User temp = new User(Email, Name, Points, locs_Found);
 
         return temp;
+    }
+
+    public boolean locFound(int position){
+        if(this.locs_Found.get(position) == true){
+            return false;
+        }else{
+            this.Points = this.Points+500;
+            this.locs_Found.set(position, true);
+            return true;
+        }
+
     }
 
     /*public int getPoints(){
