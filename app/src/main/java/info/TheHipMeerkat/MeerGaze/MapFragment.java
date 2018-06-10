@@ -81,15 +81,19 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
                             User user = dataSnapshot.getValue(User.class);
                             Log.v("tag", "user = " + user);
 
+
                             if(user.locFound_true(position)){
 
                                 User temp = user.locFound(position);
+                                user = temp;
+                                Log.v("tag", "temp = " + temp);
                                 mRef.child(userEmail).setValue(temp);
                                 Toast.makeText(view.getContext(), "Congratulations on your discovery fellow meerkat!", Toast.LENGTH_LONG).show();
 
                             }else{
                                 Toast.makeText(view.getContext(), "You already discovered this location", Toast.LENGTH_SHORT).show();
                             }
+                            Log.v("tag", "user = " + user);
                         }
 
                         @Override

@@ -50,7 +50,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private EditText mPasswordField2;
     private EditText mNameField;
     private Button mRgstrBtn;
-    private RegisterFragment fragment;
+    RegisterFragment fragment;
 
     private FirebaseAuth firebaseAuth;
 
@@ -89,6 +89,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         mNameField = (EditText) view.findViewById(R.id.nameField);
 
         mRgstrBtn.setOnClickListener(this);
+
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -139,23 +141,20 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()){
-                            /*Toast.makeText(getActivity(), "Registered successfully. Please Login."
-                                    , Toast.LENGTH_SHORT).show();*/
 
                             final DatabaseReference numUsersChild = FirebaseDatabase.getInstance().getReference().child("user");
 
-                            numUsersChild.addValueEventListener(new ValueEventListener() {
+                            numUsersChild.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                    List<Boolean> locs_Found=new ArrayList<Boolean>(Collections.nCopies(8, false));
+                                    List<Boolean> locs_Found = new ArrayList<Boolean>(Collections.nCopies(8, false));
 
                                     User temp = new User(email, name, 1000, locs_Found);
 
                                     String userId = email.split("@")[0];
 
                                     numUsersChild.child(userId).setValue(temp);
-
                                 }
 
                                 @Override
@@ -165,11 +164,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                             });
 
                         }else{
-                            Toast.makeText(RegisterFragment.this.getActivity(), "Email already in use" +
-                                    "", Toast.LENGTH_SHORT).show();
+                            /*Toast.makeText(RegisterFragment.this.getContext(), "Email already in use" +
+                                    "", Toast.LENGTH_SHORT).show();*/
                         }
                     }
                 });
+        Toast.makeText(RegisterFragment.this.getContext(), "Registered successfully. Please Login."
+                , Toast.LENGTH_SHORT).show();
         getFragmentManager().popBackStack();
 
     }

@@ -34,14 +34,13 @@ public class User {
         if(this.locs_Found.get(position) == true){
             return false;
         }else{
-            this.locs_Found.set(position, true);
             return true;
         }
 
     }
 
     public User locFound(int position){
-        this.Points = this.Points+500;
+        Points = this.Points+500;
         this.locs_Found.set(position, true);
         return this;
         }
