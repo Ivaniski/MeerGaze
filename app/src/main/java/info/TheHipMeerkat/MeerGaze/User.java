@@ -30,7 +30,7 @@ public class User {
         return temp;
     }
 
-    public boolean locFound(int position){
+    public boolean locFound_true(int position){
         if(this.locs_Found.get(position) == true){
             return false;
         }else{
@@ -40,6 +40,12 @@ public class User {
         }
 
     }
+
+    public User locFound(int position){
+        this.Points = this.Points+500;
+        this.locs_Found.set(position, true);
+        return this;
+        }
 
     /*public int getPoints(){
         return this.Points;
