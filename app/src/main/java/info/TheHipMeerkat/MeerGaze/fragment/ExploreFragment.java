@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,12 +18,12 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.volley.Response;
@@ -39,6 +41,7 @@ import java.util.List;
 import info.TheHipMeerkat.MeerGaze.Movie;
 import info.TheHipMeerkat.MeerGaze.app.MyApplication;
 import info.TheHipMeerkat.MeerGaze.R;
+import info.TheHipMeerkat.MeerGaze.MapFragment;
 
 
 public class ExploreFragment extends Fragment {
@@ -220,12 +223,22 @@ public class ExploreFragment extends Fragment {
                     .load(movie.getImage())
                     .into(holder.thumbnail);
 
+
             holder.thumbnail.setOnClickListener(new View.OnClickListener() {
                 @Override
 
                 public void onClick (View view){
 
                     Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+//                    MapFragment mapFragment = new MapFragment();
+//                    FragmentManager manager = getFragmentManager();
+//                    manager.beginTransaction()
+//                            .replace(((ViewGroup)(getView().getParent())).getId(), mapFragment, mapFragment.getTag())
+//                            .addToBackStack(null)
+//                            .commit();
+                    Intent intent = new Intent(getActivity(), MapFragment.class);
+                    startActivity(intent);
+
 
                 }
             });
@@ -292,7 +305,6 @@ public class ExploreFragment extends Fragment {
 
         switch (item.getItemId()) {
             case R.id.action_favorite:
-
 
             default:
                 super.onOptionsItemSelected(item);

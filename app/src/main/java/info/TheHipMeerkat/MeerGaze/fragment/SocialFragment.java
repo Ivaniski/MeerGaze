@@ -92,9 +92,9 @@ public class SocialFragment extends Fragment {
                 RegisterFragment registerFragment = new RegisterFragment();
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().replace(((ViewGroup)(getView().getParent())).getId(), registerFragment, registerFragment.getTag())
-                        .addToBackStack(null).commit();
-            }
-        });
+                .addToBackStack(null).commit();
+    }
+});
 
         return view;
     }
