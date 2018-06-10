@@ -46,6 +46,6 @@ public class SplashActivity extends AppCompatActivity {
                 SplashActivity.this.startActivity(new Intent(SplashActivity.this,MainActivity.class));
                 SplashActivity.this.finish();
             }
-        },3000); // 3000 = 3seconds
+        },2500); // 3000 = 3seconds
     }
 }

@@ -213,6 +213,9 @@ public class ExploreFragment extends Fragment {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.store_item_row, parent, false);
 
+            TextView text = (TextView) itemView.findViewById(R.id.title);
+            text.setTextSize(22);
+
             return new MyViewHolder(itemView);
         }
 
@@ -248,9 +251,16 @@ public class ExploreFragment extends Fragment {
             holder.name.setOnClickListener(new View.OnClickListener() {
                 @Override
 
-                public void onClick(View view) {
+                public void onClick (View view){
 
                     Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+
+                    long temp = (long) position;
+                    Intent intent = new Intent(getActivity(), MapFragment.class);
+                    intent.putExtra("position", temp);
+
+                    startActivity(intent);
+
 
                 }
             });
@@ -258,9 +268,16 @@ public class ExploreFragment extends Fragment {
             holder.price.setOnClickListener(new View.OnClickListener() {
                 @Override
 
-                public void onClick(View view) {
+                public void onClick (View view){
 
                     Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+
+                    long temp = (long) position;
+                    Intent intent = new Intent(getActivity(), MapFragment.class);
+                    intent.putExtra("position", temp);
+
+                    startActivity(intent);
+
 
                 }
             });
