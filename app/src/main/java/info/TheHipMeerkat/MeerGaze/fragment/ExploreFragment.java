@@ -233,7 +233,11 @@ public class ExploreFragment extends Fragment {
                 public void onClick (View view){
 
                     Toast.makeText(view.getContext(), "Recycle Click" + " " + (position + 1), Toast.LENGTH_SHORT).show();
+
+                    long temp = (long) position;
                     Intent intent = new Intent(getActivity(), MapFragment.class);
+                    intent.putExtra("position", temp);
+
                     startActivity(intent);
 
 

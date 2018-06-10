@@ -40,6 +40,9 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 99);
 
+        int value = (int) getIntent().getExtras().getLong("position");
+        Log.v("TAG", "position is = " +value);
+
     }
 
 
@@ -73,8 +76,6 @@ public class MapFragment extends FragmentActivity implements OnMapReadyCallback,
 //            mMap.moveCamera(CameraUpdateFactory.newLatLng(Porter));
 //            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Porter, 17));
 //        }
-
-
 
     }
 
