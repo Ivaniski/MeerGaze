@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,14 +137,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 .addOnCompleteListener(RegisterFragment.this.getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                         if(task.isSuccessful()){
-                            Toast.makeText(RegisterFragment.this.getActivity(), "Registered successfully. Please Login."
-                                    , Toast.LENGTH_SHORT).show();
+                            /*Toast.makeText(getActivity(), "Registered successfully. Please Login."
+                                    , Toast.LENGTH_SHORT).show();*/
 
                             final DatabaseReference numUsersChild = FirebaseDatabase.getInstance().getReference().child("user");
 
-                            numUsersChild
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                            numUsersChild.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -155,7 +156,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
                                     numUsersChild.child(userId).setValue(temp);
 
-                                    getFragmentManager().popBackStackImmediate();
                                 }
 
                                 @Override
@@ -170,6 +170,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                 });
+        getFragmentManager().popBackStack();
+
     }
 
 }

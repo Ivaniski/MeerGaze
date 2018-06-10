@@ -69,25 +69,6 @@ public class SocialFragment extends Fragment {
 
         mRgstrBtn = (Button) view.findViewById(R.id.register);
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() != null){
-                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                    String userEmail = firebaseUser.getEmail();
-
-                    LeaderboardFragment LeaderboardFragment = new LeaderboardFragment();
-                    FragmentManager manager = getFragmentManager();
-                    Bundle args = new Bundle();
-
-                    args.putString("email", userEmail.split("@")[0].toLowerCase().trim());
-                    LeaderboardFragment.setArguments(args);
-
-                    manager.beginTransaction().replace(((ViewGroup)(getView().getParent())).getId(), LeaderboardFragment, LeaderboardFragment.getTag())
-                            .addToBackStack(null).commit();
-                }
-            }
-        };
 
         mLgnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,17 +85,28 @@ public class SocialFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().replace(((ViewGroup)(getView().getParent())).getId(), registerFragment, registerFragment.getTag())
                 .addToBackStack(null).commit();
-    }
-});
+            }
+        });
+
 
         return view;
     }
 
     public void onStart(){
         super.onStart();
-        //updateUI(currentUser); need to create an updateUI method
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            LeaderboardFragment LeaderboardFragment = new LeaderboardFragment();
+            FragmentManager manager = getFragmentManager();
+            Bundle args = new Bundle();
+            args.putString("email", "nil");
+            LeaderboardFragment.setArguments(args);
 
-        mAuth.addAuthStateListener(mAuthListener);
+            manager.beginTransaction().replace(((ViewGroup)(getView().getParent())).getId(), LeaderboardFragment, LeaderboardFragment.getTag())
+                    .addToBackStack(null).commit();
+        }
+
+
     }
 
     private void startSignIn(){

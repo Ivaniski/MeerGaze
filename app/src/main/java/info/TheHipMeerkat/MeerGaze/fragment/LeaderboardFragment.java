@@ -62,7 +62,8 @@ public class LeaderboardFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
         mUserList = (ListView) view.findViewById(R.id.test);
 
-        email = getArguments().getString("email");
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        email = firebaseUser.getEmail().split("@")[0].toLowerCase().trim();
         mNameView = (TextView) view.findViewById(R.id.greeting_var);
 
         mDatabase.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
